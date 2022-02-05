@@ -30,14 +30,14 @@ Claro que, para isso, alguém tem que ter adicionado no **AGRUPADOR** um link pa
 
 ## 💻 Configuração
 
-Antes de tudo você pode ver a prototipação visual do projeto no Figma por [esse link.](https://www.figma.com/file/CIoLpOSaAcfqH2AZl9thpN/AGRUPADOR)
+Antes de tudo você pode ver a prototipação visual do projeto no Figma por [esse link](https://www.figma.com/file/CIoLpOSaAcfqH2AZl9thpN/AGRUPADOR).
 
-### Backend
-
-Certifique-se antes de ter disponível as seguintes ferramentas:
+Certifique-se de ter disponível as seguintes ferramentas antes de clonar e executar o projeto:
 * Node.js (a versão utilizada é a 16.13.1)
 * npm (a versão utilizada é a 8.1.2)
 * PostgreSQL (a versão utilizada é a 14.1)
+
+### Backend
 
 Em seu PostgreSQL crie a seguinte tabela:
 ```
@@ -51,10 +51,9 @@ create table groups (
 );
 ```
 
-Após isso e o projeto ter sido clonado, acesso o diretório "/backend" e digite os seguinte comando:
-`npm install`
+Após criar a tabela, acesse a pasta "backend" e execute o comando `npm install` para instalar as depêndencias necessárias.
 
-Por fim copie o arquivo ".env.example", renomeando-o para ".env" e configure preenchendo os campos necessários. Exemplo:
+Ainda na pasta "backend", copie o arquivo ".env.example", renomeando-o para ".env" e configure preenchendo os campos necessários. Exemplo:
 ```
 # Database
 DB_USER=postgres
@@ -67,8 +66,11 @@ DB_PORT=5432
 SERVER_PORT=3000
 ```
 
-Após isso basta dar o seguinte comando para iniciar a aplicação:
-`node app`
-    
+Após isso basta executar o comando `node app` para iniciar a aplicação.
+
+### Frontend 
+
+Com o projeto clonado, acesse a pasta "frontend" e execute o comando `npm install` para instalar as depêndencias necessárias. Após instaladas, execute o comando `npm start` para iniciar a aplicação.
+
 ---
 Serão adicionada outras instruções a medida que o projeto avançar.
