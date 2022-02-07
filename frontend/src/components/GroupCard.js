@@ -1,10 +1,6 @@
 import React from 'react';
 
-function copy() {
-
-}
-
-const GroupCard = (props) => {
+const GroupCard = props => {
     const whatsappLink = 'https://chat.whatsapp.com/' + props.link_code;
 
     return (
@@ -17,7 +13,7 @@ const GroupCard = (props) => {
                 {props.description}
             </p>
             
-            <div className="absolute w-full bottom-10 inline flex justify-center">
+            <div className="absolute w-full bottom-10 flex justify-center">
                 <a href={whatsappLink} className="p-1.5 bg-white rounded-xl text-sm hover:text-blue-600 ease-in duration-200" target="_blank">
                     {whatsappLink}
                 </a>
@@ -27,7 +23,7 @@ const GroupCard = (props) => {
                 />
             </div>
         </div>
-    )
+    );
 };
 
 export default GroupCard;
