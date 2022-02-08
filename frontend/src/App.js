@@ -1,37 +1,51 @@
-import './App.css';
-import GroupCard from './components/GroupCard'
-import FormModal from './components/FormModal'
-import AddGroupButton from './components/AddGroupButton';
 import Header from './components/Header';
+import FormModal from './components/FormModal';
+import AddGroupButton from './components/AddGroupButton';
+import GroupCard from './components/GroupCard';
+import Presentation from './components/Presentation';
+import LocationErrorWarining from './components/LocationErrorWarning';
 
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
+import useGeolocation from "./hooks/useGeolocation";
 
 function App() {
   const [openModal, setOpenModal] = useState(false);
+  const location = useGeolocation();
+  const groups = [''];
 
   return (
     <div>
       <Header/>
+
+      <Presentation/>
+
+      {
+      location.loaded ?
+        <div>
+          <div className="mt-20 text-3xl text-center">
+            {groups.length > 0 ? 'Grupos encontrados' : 'Não foi encontrado nenhum grupo na sua região :('}
+          </div>
+
+          <div className="flex justify-center mt-10">
+            <AddGroupButton onClick={() => {setOpenModal(true)}}/> {
+              openModal &&
+                <FormModal onClick={() => {setOpenModal(false)}}/>
+            }
+          </div>
+        </div>
+      :
+        <LocationErrorWarining/>
+      }
       
-      <div>
-        <div className="text-center text-3xl mt-20">
-          Grupos encontrados
+      {
+      groups.length > 0 &&
+        <div className="w-full px-12 lg:px-42 py-10 xl:px-36 grid justify-items-center grid-cols-1 lg:grid-cols-2">
+          <GroupCard title='Turma 2020.1' description='Descrição' link_code='0101010101010101010101'/>
+          <GroupCard title='Medicina' description='Descrição' link_code='0101010101010101010101'/>
+          <GroupCard title='Engenharia Civil' description='Descrição' link_code='0101010101010101010101'/>
+          <GroupCard title='Sistemas 2021.1' description='Descrição' link_code='0101010101010101010101'/>
         </div>
-
-        <div className="flex justify-center mt-10">
-          <AddGroupButton onClick={() => {setOpenModal(true)}}/> {
-            openModal &&
-              <FormModal onClick={() => {setOpenModal(false)}}/>
-          }
-        </div>
-      </div>
-
-      <div className="w-full mt-10 grid justify-items-center grid-cols-1 px-12 xl:grid-cols-2 xl:px-60">
-        <GroupCard title='Turma 2020.1' description='Descrição' link_code='0101010101010101010101'/>
-        <GroupCard title='Medicina' description='Descrição' link_code='0101010101010101010101'/>
-        <GroupCard title='Engenharia Civil' description='Descrição' link_code='0101010101010101010101'/>
-        <GroupCard title='Sistemas 2021.1' description='Descrição' link_code='0101010101010101010101'/>
-      </div>
+      }
     </div>
   );
 }

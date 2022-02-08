@@ -5,7 +5,7 @@ const GroupCard = props => {
 
     return (
         <div className="relative w-[26rem] h-[26rem] mt-12 bg-teal-600 rounded-2xl shadow-md">
-            <img alt="logo do whatsapp" className="w-12 pt-8 text-center select-none mx-auto" src="/whatsapp_logo.svg"/>
+            <img alt="logo do whatsapp" className="w-12 mx-auto pt-8 select-none text-center" src="/vectors/whatsapp_logo.svg"/>
              
             <h1 className="mt-4 text-white text-center text-3xl"> {props.title} </h1>
 
@@ -13,12 +13,12 @@ const GroupCard = props => {
                 {props.description}
             </p>
             
-            <div className="absolute w-full bottom-10 flex justify-center">
+            <div className="absolute w-full flex justify-center bottom-10">
                 <a href={whatsappLink} className="p-1.5 bg-white rounded-xl text-sm hover:text-blue-600 ease-in duration-200" target="_blank">
                     {whatsappLink}
                 </a>
                 <img 
-                    alt="copiar" src="/copy.svg" className="w-6 ml-2 cursor-pointer select-none hover:mb-2 ease-in duration-100"
+                    alt="copiar" src="/vectors/copy.svg" className="w-6 ml-2 select-none cursor-pointer hover:mb-2 ease-in duration-100"
                     onClick={() => navigator.clipboard.writeText(whatsappLink)}
                 />
             </div>
