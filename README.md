@@ -12,14 +12,14 @@ Claro que, para isso, alguém tem que ter adicionado no **AGRUPADOR** um link pa
 
 ## 📑 Requisitos
 
-- [ ]  Ao acessar o site, será solicitado o acesso à geolocalização do aparelho;
+- [x]  Ao acessar o site, será solicitado o acesso à geolocalização do aparelho;
 - [ ]  Após aprovar acesso à geolocalização, serão exibidos os grupos existentes dentro de um raio de 1km;
-- [ ]  Ao clicar em um grupo será exibida sua descrição e o botão para entrar no grupo, que apontará para o link de invite;
-- [ ]  Haverá um botão para criar um novo grupo a partir da sua geolocalização atual, informando Nome, Descrição e Link de Invite;
+- [x]  Ao clicar em um grupo será exibida sua descrição e o botão para entrar no grupo, que apontará para o link de invite;
+- [x]  Haverá um botão para criar um novo grupo a partir da sua geolocalização atual, informando Nome, Descrição e Link de Invite;
 - [x]  O back-end da aplicação deverá ser feito em **Node.js.**
 - [x]  O banco de dados deverá ser preferencialmente **Postgres** (ou outro banco relacional);
 - [ ]  O front-end deverá ser uma Single-Page Application em **React**, que se comunique com o back-end através de API (REST ou GraphQL, o que preferir);
-- [ ]  O readme do projeto deve conter instruções claras de como configurá-lo;
+- [x]  O readme do projeto deve conter instruções claras de como configurá-lo;
 - [ ]  Sua aplicação (em especial o back-end) deve se preocupar em tratar/validar os dados inputados pelo usuário;
 
 ## ✍️ Observações
@@ -39,15 +39,21 @@ Certifique-se de ter disponível as seguintes ferramentas antes de clonar e exec
 
 ### Backend
 
-Em seu PostgreSQL crie a seguinte tabela:
+Para lidar com as coordenadas geográficas e calcular distâncias usaremos algumas extensões do PostgreSQL, para adicioná-las execute os seguintes comandos na sua database, um após o outro:
 ```
-create table groups (
-	id serial primary key,
-	name varchar(25) not null,
-	description varchar(200) not null,
-	link_code char(22) not null,
-	latitude float(5) not null,
-	longitude float(5) not null
+CREATE EXTENSION cube;
+CREATE EXTENSION earthdistance;
+```
+
+Agora, em sua database do PostgreSQL crie a seguinte tabela:
+```
+CREATE TABLE GROUPS (
+	ID SERIAL NOT NULL,
+	NAME VARCHAR(25) NOT NULL,
+	DESCRIPTION VARCHAR(200) NOT NULL,
+	LINK_CODE CHAR(22) NOT NULL,
+	LATITUDE FLOAT(5) NOT NULL,
+	LONGITUDE FLOAT(5) NOT NULL
 );
 ```
 
@@ -63,8 +69,9 @@ DB_HOST=localhost
 DB_PORT=5432
 
 # Server
-SERVER_PORT=3000
+SERVER_PORT=5000
 ```
+Se atente de não usar a mesma porta em que o frontend será executado.
 
 Após isso basta executar o comando `node app` para iniciar a aplicação.
 
@@ -73,4 +80,4 @@ Após isso basta executar o comando `node app` para iniciar a aplicação.
 Com o projeto clonado, acesse a pasta "frontend" e execute o comando `npm install` para instalar as depêndencias necessárias. Após instaladas, execute o comando `npm start` para iniciar a aplicação.
 
 ---
-Serão adicionada outras instruções a medida que o projeto avançar.
+Serão adicionadas outras instruções a medida que o projeto avançar.
