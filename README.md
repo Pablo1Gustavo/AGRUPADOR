@@ -13,14 +13,14 @@ Claro que, para isso, alguém tem que ter adicionado no **AGRUPADOR** um link pa
 ## 📑 Requisitos
 
 - [x]  Ao acessar o site, será solicitado o acesso à geolocalização do aparelho;
-- [ ]  Após aprovar acesso à geolocalização, serão exibidos os grupos existentes dentro de um raio de 1km;
+- [x]  Após aprovar acesso à geolocalização, serão exibidos os grupos existentes dentro de um raio de 1km;
 - [x]  Ao clicar em um grupo será exibida sua descrição e o botão para entrar no grupo, que apontará para o link de invite;
 - [x]  Haverá um botão para criar um novo grupo a partir da sua geolocalização atual, informando Nome, Descrição e Link de Invite;
 - [x]  O back-end da aplicação deverá ser feito em **Node.js.**
 - [x]  O banco de dados deverá ser preferencialmente **Postgres** (ou outro banco relacional);
-- [ ]  O front-end deverá ser uma Single-Page Application em **React**, que se comunique com o back-end através de API (REST ou GraphQL, o que preferir);
+- [x]  O front-end deverá ser uma Single-Page Application em **React**, que se comunique com o back-end através de API (REST ou GraphQL, o que preferir);
 - [x]  O readme do projeto deve conter instruções claras de como configurá-lo;
-- [ ]  Sua aplicação (em especial o back-end) deve se preocupar em tratar/validar os dados inputados pelo usuário;
+- [x]  Sua aplicação (em especial o back-end) deve se preocupar em tratar/validar os dados inputados pelo usuário;
 
 ## ✍️ Observações
 
@@ -45,7 +45,7 @@ CREATE EXTENSION cube;
 CREATE EXTENSION earthdistance;
 ```
 
-Agora, em sua database do PostgreSQL crie a seguinte tabela:
+Agora, em sua database do PostgreSQL, crie a seguinte tabela:
 ```
 CREATE TABLE GROUPS (
 	ID SERIAL NOT NULL,
@@ -73,11 +73,17 @@ SERVER_PORT=5000
 ```
 Se atente de não usar a mesma porta em que o frontend será executado.
 
-Após isso basta executar o comando `node app` para iniciar a aplicação.
+Após isso, basta executar o comando `node app` para iniciar a aplicação.
 
 ### Frontend 
 
-Com o projeto clonado, acesse a pasta "frontend" e execute o comando `npm install` para instalar as depêndencias necessárias. Após instaladas, execute o comando `npm start` para iniciar a aplicação.
+**Lembre-se de iniciar o backend para usar o frontened corretamente.**
 
----
-Serão adicionadas outras instruções a medida que o projeto avançar.
+Com o projeto clonado, acesse a pasta "frontend" e execute o comando `npm install` para instalar as depêndencias necessárias.
+
+Também na pasta "frontend", copie o arquivo ".env.example", renomeando-o para ".env" e configure inserido a URL de consumo da api (definida pelo backend). Exemplo:
+```
+REACT_APP_API_URL=http://localhost:5000
+```
+
+ Após isso, execute o comando `npm start` para iniciar a aplicação.
