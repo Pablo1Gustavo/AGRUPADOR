@@ -1,21 +1,24 @@
 require('dotenv').config()
 
 const express = require('express');
-const app = express();
-const { getGroupsInRadius, create } = require('./controllers/groups')
-const { 
-    getGroupsInRadiusValidations, getGroupsInRadiusMiddleware,
-    createGroupValidations, createGroupMiddleware
-} = require('./middlewares/groups')
+const cors = require('cors');
+const { getGroupsInRadius, create } = require('./controllers/groups');
+const { getGroupsInRadiusValidations, createGroupValidations } = require('./middlewares/groupsValidations');
+const { checkErrorsMiddleware } = require('./middlewares/checkErrors');
 
-app.use(express.json())
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// Routes
 
 app.get('/', (req, res) => {
     res.status(200).json({ ok: true });
 });
 
-app.get('/groups/radius/:radius', getGroupsInRadiusValidations, getGroupsInRadiusMiddleware, getGroupsInRadius);
-app.post('/groups', createGroupValidations, createGroupMiddleware, create);
+app.get('/groups/radius/:radius/:latitude/:longitude', getGroupsInRadiusValidations, checkErrorsMiddleware, getGroupsInRadius);
+
+app.post('/groups', createGroupValidations, checkErrorsMiddleware, create);
 
 app.listen(process.env.SERVER_PORT, () =>{
     console.log('Server listening on port', process.env.SERVER_PORT)

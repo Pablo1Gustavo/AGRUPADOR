@@ -2,12 +2,11 @@ const pool = require('../database');
 
 module.exports = {
     getGroupsInRadius: async (req, res) => {
-        const { radius } = req.params;
-        const { latitude, longitude } = req.body;
+        const { radius, latitude, longitude } = req.params;
 
         try {
             const groups = await pool.query(
-                `SELECT NAME, DESCRIPTION, LINK_CODE, LATITUDE, LONGITUDE FROM GROUPS
+                `SELECT * FROM GROUPS
                     WHERE point(longitude, latitude) <@> point($1, $2) < $3*0.6214`,
                     [longitude, latitude, radius]
                 );

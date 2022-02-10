@@ -1,26 +1,17 @@
-const { body, validationResult } = require("express-validator");
+const { param, body } = require("express-validator");
 
 module.exports = {
     getGroupsInRadiusValidations: [
-        body('latitude')
-            .notEmpty()
-                .withMessage('Latitude obrigatória').bail()
+        param('radius')
+            .isFloat({ gt: 0, max: 100})
+                .withMessage('O raio deve ser um número positivo menor ou igual a 100'),
+        param('latitude')
             .isFloat({ min: -90, max: 90 })
                 .withMessage('A latitude deve ser um número de -90 a 90'),
-        body('longitude')
-            .notEmpty()
-                .withMessage('Longitude obrigatória').bail()
+        param('longitude')
             .isFloat({ min: -90, max: 90 })
                 .withMessage('A longitude deve ser um número de -90 a 90')
     ],
-    getGroupsInRadiusMiddleware: (req, res, next) => {
-        const errors = validationResult(req);
-
-        if (!errors.isEmpty())
-            return res.status(400).json({ errors: errors.array() });
-        next();
-    },
-
     createGroupValidations: [
         body('name')
             .notEmpty()
@@ -47,12 +38,5 @@ module.exports = {
                 .withMessage('Longitude obrigatória').bail()
             .isFloat({ min: -90, max: 90 })
                 .withMessage('A longitude deve ser um número de -90 a 90'),  
-    ],
-    createGroupMiddleware: (req, res, next) => {
-        const errors = validationResult(req);
-
-        if (!errors.isEmpty())
-            return res.status(400).json({ errors: errors.array() });
-        next();
-    }
+    ]
 };
